@@ -1,0 +1,90 @@
+<div class="container mt-4">
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item " *ngFor="let month of months; let i = index">
+      <h2 class="accordion-header" id="flush-heading{{i}}">
+        <button class="accordion-button collapsed"
+                type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#flush-collapse' + i" aria-expanded="false"
+                [attr.aria-controls]="'flush-collapse' + i"
+                [ngClass]="{'hidden': dataSources[i].length === 0}"
+                [disabled]="dataSources[i].length === 0"
+        >
+          <strong [ngClass]="{'disabled': dataSources[i].length === 0}">{{ month.name }}</strong>
+        </button>
+
+
+      </h2>
+      <div [id]="'flush-collapse' + i" class="accordion-collapse collapse" [attr.aria-labelledby]="'flush-heading' + i" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+<!-- table code -->
+<!--          <mat-form-field style="width: 100%;">-->
+<!--            <mat-label>Filter</mat-label>-->
+<!--            <input matInput  placeholder="search" #input (keyup)="indUserByName(input)">-->
+<!--          </mat-form-field>-->
+          <div class="fw-bold my-3 ">
+            <div class="text-success">Payé:{{  dataPayementState[i][0]}} </div>
+            <div class="text-danger">Impayé:{{  dataPayementState[i][1]}} </div>
+
+          </div>
+          <table mat-table [dataSource]="dataSources[i]" class="mat-elevation-z8"  matSort >
+            <ng-container matColumnDef="pay">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="pay">payé</th>
+              <td mat-cell *matCellDef="let element;let row ">
+                <input type="checkbox"  [checked]="element.paid" (click)='checkPaid(row)' >
+              </td>
+            </ng-container>
+
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="montant">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="montant"> montant</th>
+              <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+            </ng-container>
+            <!---->
+            <!-- Name Column -->
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef  mat-sort-header="numero"> Numero </th>
+              <td mat-cell *matCellDef="let element"> {{element.checkNumber}} </td>
+            </ng-container>
+            <!---->
+            <!-- Weight Column -->
+            <ng-container matColumnDef="paydate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="paydate"> Date de Paiment</th>
+              <td mat-cell *matCellDef="let element"> {{element.payDate|date:'mediumDate'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Observation">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header=" Observation"> Observation</th>
+              <td mat-cell *matCellDef="let element"> {{element.notes}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Options">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="Options"> Options</th>
+              <td mat-cell *matCellDef=" let element;let index = index;let row">
+                <button mat-icon-button color="primary"  aria-label="Example icon button with a menu icon">
+                  <mat-icon  (click)="editCheck(row)">edit</mat-icon>
+                </button>
+              <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                <mat-icon (click)="deleteCheck(row)">delete</mat-icon>
+              </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="isSender">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="isSender">Partie de la transaction</th>
+              <td mat-cell *matCellDef="let element">
+                  {{element.isSender ? 'Expéditeur' : 'Bénéficiaire'}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="fournisseur">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="fournisseur"> fournisseur</th>
+              <td mat-cell *matCellDef="let element;" > {{element.supplier }} </td>
+            </ng-container>
+              <!---->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr  mat-row *matRowDef="let rows; columns: displayedColumns; " [ngStyle]="{ 'background-color': rows.color }"></tr>
+          </table>
+        </div>'
+      </div>
+    </div>
+  </div >
+
+</div>
+<!--isSender-->

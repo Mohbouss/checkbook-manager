@@ -1,0 +1,44 @@
+
+<form [formGroup]="BookForm">
+  <h1 mat-dialog-title> Modifier Un carnet de chèque</h1>
+  <div mat-dialog-content>
+<mat-form-field  appearance="outline">
+  <mat-label>choisir la banque</mat-label>
+  <mat-select (selectionChange)="onBookSelected($event)">
+    <mat-option *ngFor="let book of Books" [value]="book">
+      {{book.bank}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field appearance="outline">
+        <mat-label>debut</mat-label>
+        <input matInput type="number"  formControlName="Start">
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field appearance="outline">
+        <mat-label>fin</mat-label>
+        <input matInput type="number" formControlName="End">
+      </mat-form-field>
+    </div>
+  </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Color</mat-label>
+      <input matInput   type="color" formControlName="Color" >
+    </mat-form-field>
+
+    <div mat-dialog-actions [align]="'end'">
+
+      <button mat-raised-button class="close-btn me-0" mat-dialog-close="" (click)="closeDialog()">Close</button>
+      <button mat-raised-button class="delete-button me-0" (click)="deleteBook()" >Delete</button>
+      <button mat-raised-button color="primary" (click)="UpdateBook()" >Update</button>
+
+    </div>
+  </div>
+</form>
+

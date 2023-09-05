@@ -1,0 +1,43 @@
+
+<form [formGroup]="BookForm">
+  <h1 mat-dialog-title> Formulaire d'ajout d'un carnet de Chèque</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Nom de Banque</mat-label>
+      <input matInput formControlName="Bank">
+      <mat-error *ngIf="BookForm.get('Bank').hasError('required') && (BookForm.get('Bank').touched || BookForm.get('Bank').dirty)">
+        Le champ Bank est obligatoire.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="outline">
+          <mat-label>debut</mat-label>
+          <input matInput type="number" min="0" (keydown)="onStartKeyDown($event)" formControlName="Start">
+          <mat-error *ngIf="BookForm.get('Start').hasError('required')&& (BookForm.get('Start').touched || BookForm.get('Start').dirty)">Le champ debut  est obligatoire.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+
+        <mat-form-field appearance="outline">
+          <mat-label>fin</mat-label>
+          <input matInput type="number"  formControlName="End" min="0" (keydown)="onStartKeyDown($event)">
+          <mat-error *ngIf="BookForm.get('End').hasError('required')&& (BookForm.get('End').touched || BookForm.get('End').dirty)">Le champ fin  est obligatoire.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Color</mat-label>
+      <input matInput  type="color" formControlName="Color" >
+      <mat-error *ngIf="BookForm.get('Color').hasError('required')&& (BookForm.get('Color').touched || BookForm.get('Color').dirty)">Le champ Color  est obligatoire.</mat-error>
+    </mat-form-field>
+
+    <div mat-dialog-actions [align]="'end'">
+      <button mat-raised-button color="warn" mat-dialog-close="" (click)="CloseDialog()">Close</button>
+      <button mat-raised-button color="primary" (click)="SaveBook()">Save</button>
+
+    </div>
+  </div>
+</form>

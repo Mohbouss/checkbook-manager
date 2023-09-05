@@ -1,0 +1,16 @@
+.mat-dialog-content{
+  overflow-y: auto !important;
+
+  height:45vh;
+}
+mat-form-field {
+  width: 100%;
+}
+mat-error{
+  font-size: 12px;
+  display:inline-block;
+}
+
+.mat-dialog-content::-webkit-scrollbar {
+  display: none;
+}

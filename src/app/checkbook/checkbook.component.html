@@ -1,0 +1,23 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <form class="input-group d-flex w-auto">
+      <button mat-raised-button color="primary" (click)="openDialog()">ajouter un cheque</button>
+    </form>
+    <span class="navbar-text fw-bold">
+ Payé:{{mainPaid}}
+  </span>
+    <span class="navbar-text fw-bold">
+   Impayé:{{mainUnPaid}}
+  </span>
+
+    <div>
+
+      <button mat-raised-button color="primary" (click)="openBookDialog()"  >créer un carnet</button>
+      <button mat-raised-button color="warn" class="ms-2" (click)="openEditDialog()"> modifer</button>
+    </div>
+  </div>
+</nav>
+
+<app-accordion></app-accordion>
